@@ -1,7 +1,14 @@
 package asset.management.system.assetmanagement.Models.RoadSigns;
 
-//TODO DOCUMENT NAME
-public class FlashingSigns {
+import asset.management.system.assetmanagement.Models.MainModel.*;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
+
+@Document(collection = "assetcollection")
+@TypeAlias("flashingsigns")
+public class FlashingSigns extends AssetMainModel{
     private String type;
     private double voltage;
     private int noOfLights;
@@ -9,13 +16,38 @@ public class FlashingSigns {
     private String viewDistance;
     private double viewAngle;
 
-    public FlashingSigns(String type,
+    public FlashingSigns(String id,
+                         String brand,
+                         String model,
+                         String name,
+                         String category,
+                         String subcategory,
+                         String serial_no,
+                         String assetStatus,
+                         AssetLocation location,
+                         String installation_date,
+                         String purchase_date,
+                         List<AssetHistory> assetHistory,
+                         String provider,
+                         double assetCost,
+                         String assetCondition,
+                         String warehouse,
+                         String unitOfMeasure,
+                         String longDescription,
+                         OtherData otherData,
+                         boolean multiGeopoints,
+                         List<Double> listGeopoints,
+                         Dimensions dimensions,
+                         String mapMarker,
+                         List<String> specialFeatures,
+                         String type,
                          double voltage,
                          int noOfLights,
                          String signInstrucion,
                          String viewDistance,
                          double viewAngle)
     {
+        super(id, brand, model, name, category, subcategory, serial_no, assetStatus, location, installation_date, purchase_date, assetHistory, provider, assetCost, assetCondition, warehouse, unitOfMeasure, longDescription, otherData, multiGeopoints, listGeopoints, dimensions, mapMarker, specialFeatures);
         this.type = type;
         this.voltage = voltage;
         this.noOfLights = noOfLights;

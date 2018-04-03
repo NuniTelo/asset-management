@@ -7,7 +7,10 @@ package asset.management.system.assetmanagement;
 import java.util.List;
 
 public class FilterArgs {
+    //--------API--VERSION----------------------
+//    public static String API_VERSION = "v1";
 
+    public static final String API_VERSION = "v1";
     //-------start-region-condition-------------
     public static String GOOD_CONDITION = "GOOD";
     public static String POOR_CONDITION = "POOR";
@@ -45,26 +48,26 @@ public class FilterArgs {
     //---------------roadInfrastucture--structure----
 
     //----------components---usage---------------
-    private static String USAGE_INTERNET = "INTERNET";
-    private static String USAGE_POWER = "POWER";
+    public static String USAGE_INTERNET = "INTERNET";
+    public static String USAGE_POWER = "POWER";
     //-------------------END--------------------
 
 
     //---------------bulb-size------------------
-    private static String SMALL_BULB = "SMALL";
-    private static String MEDIUM_BULB = "MEDIUM";
-    private static String BIG_BULB = "BIG";
+    public static String SMALL_BULB = "SMALL";
+    public static String MEDIUM_BULB = "MEDIUM";
+    public static String BIG_BULB = "BIG";
     //-------------------end--------------------
 
     //-------------camera-type-----------------
-    private static String CAMERA_PTZ = "PTZ";
-    private static String CAMERA_DOME = "DOME";
-    private static String CAMERA_BULLET = "BULLET";
-    private static String CAMERA_MINI = "MINI";
-    private static String CAMERA_BOX = "BOX";
-    private static String CAMERA_BULB = "BULB";
+    public static String CAMERA_PTZ = "PTZ";
+    public static String CAMERA_DOME = "DOME";
+    public static String CAMERA_BULLET = "BULLET";
+    public static String CAMERA_MINI = "MINI";
+    public static String CAMERA_BOX = "BOX";
+    public static String CAMERA_BULB = "BULB";
     //--------------end-camera-type------------
 
-
+    public static String INSTALLATION_DATA_FIELD = "installation_date";
 
 }

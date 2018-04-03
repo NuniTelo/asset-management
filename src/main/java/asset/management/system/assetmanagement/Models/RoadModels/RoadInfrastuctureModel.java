@@ -1,15 +1,17 @@
 package asset.management.system.assetmanagement.Models.RoadModels;
 
-import asset.management.system.assetmanagement.Models.MainModel.AssetMainModel;
+import asset.management.system.assetmanagement.Models.MainModel.*;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
-//TODO collection and document
-//klase qe do te trashegoje qe te gjitha fushat qe perfshihen ne AssetMainModel
-public class RoadInfrastuctureModel {
+
+@Document(collection = "assetcollection")
+@TypeAlias("roadinfrastucture")
+public class RoadInfrastuctureModel extends AssetMainModel {
 
     //since it will have all the
-
-    //structure type can be a list of diffrent types
+    //structureTypes, can be a list of diffrent types
     private List<String> structureTypes;
 
     //road where this is placecd
@@ -24,24 +26,43 @@ public class RoadInfrastuctureModel {
     //technical properties
     private TechnicalProperties technicalProperties;
 
-    //assets all fields
-    private AssetMainModel assetMainModel;
 
-    public RoadInfrastuctureModel(List<String> structureTypes, String associativeRoad, String assetName, String usage, TechnicalProperties technicalProperties, AssetMainModel assetMainModel) {
+    public RoadInfrastuctureModel(String id,
+                                  String brand,
+                                  String model,
+                                  String name,
+                                  String category,
+                                  String subcategory,
+                                  String serial_no,
+                                  String assetStatus,
+                                  AssetLocation location,
+                                  String installation_date,
+                                  String purchase_date,
+                                  List<AssetHistory> assetHistory,
+                                  String provider,
+                                  double assetCost,
+                                  String assetCondition,
+                                  String warehouse,
+                                  String unitOfMeasure,
+                                  String longDescription,
+                                  OtherData otherData,
+                                  boolean multiGeopoints,
+                                  List<Double> listGeopoints,
+                                  Dimensions dimensions,
+                                  String mapMarker,
+                                  List<String> specialFeatures,
+                                  List<String> structureTypes,
+                                  String associativeRoad,
+                                  String assetName,
+                                  String usage,
+                                  TechnicalProperties technicalProperties)
+    {
+        super(id, brand, model, name, category, subcategory, serial_no, assetStatus, location, installation_date, purchase_date, assetHistory, provider, assetCost, assetCondition, warehouse, unitOfMeasure, longDescription, otherData, multiGeopoints, listGeopoints, dimensions, mapMarker, specialFeatures);
         this.structureTypes = structureTypes;
         this.associativeRoad = associativeRoad;
         this.assetName = assetName;
         this.usage = usage;
         this.technicalProperties = technicalProperties;
-        this.assetMainModel = assetMainModel;
-    }
-
-    public AssetMainModel getAssetMainModel() {
-        return assetMainModel;
-    }
-
-    public void setAssetMainModel(AssetMainModel assetMainModel) {
-        this.assetMainModel = assetMainModel;
     }
 
     public List<String> getStructureTypes() {

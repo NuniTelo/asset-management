@@ -1,23 +1,31 @@
 package asset.management.system.assetmanagement.Models.CategoryModel;
 
-//TODO DOCUMENT NAME
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "categorieslist")
 public class CategoryModel {
-    private int categoryId;
+    @Id
+    private String id;
+
+    //this is going to be subcategory name
     private String categoryName;
+
+    //this is going to be the main level for a particular category
     private String parent;
 
-    public CategoryModel(int categoryId, String categoryName, String parent) {
-        this.categoryId = categoryId;
+    public CategoryModel(String id, String categoryName, String parent) {
+        this.id = id;
         this.categoryName = categoryName;
         this.parent = parent;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public String getId() {
+        return id;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getCategoryName() {

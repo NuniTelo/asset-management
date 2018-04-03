@@ -1,64 +1,91 @@
 package asset.management.system.assetmanagement.Models.CameraModel;
 
-import asset.management.system.assetmanagement.Models.MainModel.AssetMainModel;
+import asset.management.system.assetmanagement.Models.MainModel.*;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 
 //TODO collection and document
 
-@Document(collection = "cameracategory")
-public class CameraModel {
+@Document(collection = "assetcollection")
+@TypeAlias("cameras")
+public class CameraModel extends AssetMainModel{
     //camera type
-    private String type;
+
+    public String type;
 
     //infrared TRUE OR FALSE
-    private boolean infrared;
+    public boolean infrared;
 
     //name of lens
-    private String lens;
+    public String lens;
 
     //resolution of the camera
-    private String resolution;
+    public String resolution;
 
     //type of sensor
-    private String style;
+    public String style;
 
     //no.of IR-LEDS
-    private int IRLEDS;
+    public int IRLEDS;
 
     //distance of IR-LEDS
-    private double IRDistance;
+    public double IRDistance;
 
     //is IP-camera or not
-    private boolean hasIP;
+    public boolean hasIP;
 
     //image sensor
-    private String imageSensor;
+    public String imageSensor;
 
     //ip of the camera if has any
-    private String IP;
+    public String IP;
 
     //list of sensor in the camera
-    private List<String> sensors;
+    public List<String> sensors;
 
     //supported browsers
-    private List<String> browserSupport;
+    public List<String> browserSupport;
 
     //rain,sun,snow etc.
-    private List<String> operatingConditions;
+    public List<String> operatingConditions;
 
     //camera compression
-    private CameraCompression cameraCompression;
+    public CameraCompression cameraCompression;
 
-    private CameraImage cameraImage;
+    public CameraImage cameraImage;
 
-    private AlarmTrigger alarmTrigger;
+    public AlarmTrigger alarmTrigger;
 
-    //main model that all the fields have
-    private AssetMainModel assetMainModel;
-
-    public CameraModel(String type,
+    public CameraModel(String id,
+                       String brand,
+                       String model,
+                       String name,
+                       String category,
+                       String subcategory,
+                       String serial_no,
+                       String assetStatus,
+                       AssetLocation location,
+                       String installation_date,
+                       String purchase_date,
+                       List<AssetHistory> assetHistory,
+                       String provider,
+                       double assetCost,
+                       String assetCondition,
+                       String warehouse,
+                       String unitOfMeasure,
+                       String longDescription,
+                       OtherData otherData,
+                       boolean multiGeopoints,
+                       List<Double> listGeopoints,
+                       Dimensions dimensions,
+                       String mapMarker,
+                       List<String> specialFeatures,
+                       String type,
                        boolean infrared,
                        String lens,
                        String resolution,
@@ -73,9 +100,9 @@ public class CameraModel {
                        List<String> operatingConditions,
                        CameraCompression cameraCompression,
                        CameraImage cameraImage,
-                       AlarmTrigger alarmTrigger,
-                       AssetMainModel assetMainModel)
+                       AlarmTrigger alarmTrigger)
     {
+        super(id, brand, model, name, category, subcategory, serial_no, assetStatus, location, installation_date, purchase_date, assetHistory, provider, assetCost, assetCondition, warehouse, unitOfMeasure, longDescription, otherData, multiGeopoints, listGeopoints, dimensions, mapMarker, specialFeatures);
         this.type = type;
         this.infrared = infrared;
         this.lens = lens;
@@ -92,7 +119,6 @@ public class CameraModel {
         this.cameraCompression = cameraCompression;
         this.cameraImage = cameraImage;
         this.alarmTrigger = alarmTrigger;
-        this.assetMainModel = assetMainModel;
     }
 
     public String getType() {
@@ -223,11 +249,5 @@ public class CameraModel {
         this.alarmTrigger = alarmTrigger;
     }
 
-    public AssetMainModel getAssetMainModel() {
-        return assetMainModel;
-    }
 
-    public void setAssetMainModel(AssetMainModel assetMainModel) {
-        this.assetMainModel = assetMainModel;
-    }
 }
