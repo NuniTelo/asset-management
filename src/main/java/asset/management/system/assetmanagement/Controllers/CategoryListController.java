@@ -3,6 +3,8 @@ package asset.management.system.assetmanagement.Controllers;
 import asset.management.system.assetmanagement.FilterArgs;
 import asset.management.system.assetmanagement.Models.CategoryModel.CategoryModel;
 import asset.management.system.assetmanagement.Services.CategoriesService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/"+ FilterArgs.API_VERSION + "/listCategories")
+@Api(value = "CAtegories Controller", description = "Perform request on categories.")
 public class CategoryListController {
 
     @Autowired
@@ -21,12 +24,14 @@ public class CategoryListController {
 
     //List all categories
     @GetMapping
+    @ApiOperation(value = "Lists ALL of out categories.")
     public List<CategoryModel> listAllCategories(){
         return service.getAllCategories();
     }
 
     //get all subcategories by parent.
     @GetMapping("/category={category}")
+    @ApiOperation(value = "Send category and find all children of that paricular category.")
     public List<CategoryModel> getAllSubcategoriesByCategory(@PathVariable String category){
         return service.getAllSubcategoriesByCategory(category);
     }
@@ -48,6 +53,7 @@ public class CategoryListController {
 //    }
 
     @PostMapping("/newCategory")
+    @ApiOperation(value = "Add a new category.")
     public String postNewCategory(@RequestBody Object newCategoryModel){
         /*
         The model for this post request must be something like :

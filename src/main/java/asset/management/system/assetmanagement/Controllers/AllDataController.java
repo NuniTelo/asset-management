@@ -63,28 +63,35 @@ public class AllDataController {
 
     //Get only one object by passing the id
     @GetMapping("/id={id}")
+    @ApiOperation(value = "Get only a specific asset by ID.")
     public Optional getOneById(@PathVariable String id){
         return service.getOneById(id);
     }
 
     //Get all assets by category
     @GetMapping("/category={category}")
+    @ApiOperation(value = "Filter our assets by category.")
     public List<AssetMainModel> getByCategory(@PathVariable String category){
         return service.getByCategory(category);
     }
 
+    //Get multiple assets category to a bigger list
     @GetMapping("/category/multiple/category={category}")
+    @ApiOperation(value = "Get multiple assets category to a bigger list.")
     public List<AssetMainModel> getListOfCategories(@PathVariable String category){
         listOfCategories.addAll(service.getByCategory(category));
         return listOfCategories;
     }
 
+    //Clear the global list
     @GetMapping("/category/multiple/clear")
+    @ApiOperation(value = "Clear the big array list that hold multiple categories in the same time.")
     public String clearAllListOfCategories(){
         listOfCategories.clear();
         return "Done";
     }
 
+    @ApiOperation(value = "Clear one of categories in the list that holds multiple categories.")
     @GetMapping("/category/multiple/clearcategory={category}")
     public List<AssetMainModel> clearOneCategorieFromList(@PathVariable String category){
         for(AssetMainModel modelCategory: listOfCategories){
@@ -96,6 +103,7 @@ public class AllDataController {
     }
 
     //display one one assets of a specified subcategory
+    @ApiOperation(value = "Filter by subcategories.")
     @GetMapping("/subcategory = {subcategory}")
     public List<AssetMainModel>getByOnlyOneSubcategory(@PathVariable String subcategory){
         List<AssetMainModel> getList = service.getOnlyByOneSubcategory(subcategory);
@@ -104,6 +112,7 @@ public class AllDataController {
 
     //add to a global list assets of the diffrent subcategories
     @GetMapping("/subcategory/multiple/subcategory={subcategory}")
+    @ApiOperation(value = "Clear one of categories in the list that holds multiple categories.")
     public List<AssetMainModel> appendSubcategoryModels(@PathVariable String subcategory){
         listOfSubcategories.addAll(service.getOnlyByOneSubcategory(subcategory));
         return listOfSubcategories;
@@ -133,6 +142,7 @@ public class AllDataController {
 
 
     //Get a list by it's condition that may be GOOD,POOR,BROKEN
+    @ApiOperation(value = "Filter assets by condition")
     @GetMapping("/assetCondition={condition}")
     public List<AssetMainModel> getByAssetCondition(@PathVariable String condition){
         return service.getByAssetCondition(condition);
@@ -140,12 +150,14 @@ public class AllDataController {
 
     //Get all assets by model///ONLY BY ONE MODEL
     @GetMapping("/model={model}")
+    @ApiOperation(value = "Filter assets by model")
     public List<AssetMainModel> getByModel(@PathVariable String model){
         return service.getByModel(model);
     }
 
     //Get multiple models in a list
     @GetMapping("/model/multiple/model={model}")
+    @ApiOperation(value = "Filter multiple assets by model.")
     public List<AssetMainModel> getByMultipleModels(@PathVariable  String model){
         listOfModels.addAll(service.getByModel(model));
         return listOfModels;
@@ -153,6 +165,7 @@ public class AllDataController {
 
     //Delete a model type from the list
     @GetMapping("/model/multiple/clearModel={model}")
+    @ApiOperation(value = "Delete one particular model from global list.")
     public List<AssetMainModel> deleteOneModelFromList(@PathVariable String model){
         if(listOfModels.size()>0){
             for (AssetMainModel modelClear: listOfModels) {
@@ -166,6 +179,7 @@ public class AllDataController {
 
     //Delete all models from the list
     @GetMapping("/model/multiple/clear")
+    @ApiOperation(value = "Clear the whole list that holds assets filterd by model.")
     public String clearAllModels(){
         listOfModels.clear();
         return "Done";
@@ -173,29 +187,34 @@ public class AllDataController {
 
     //Get assets by model and condition
     @GetMapping("/model={model}&condition={condition}")
+    @ApiOperation(value = "Filter assets by model and condition.")
     public List<AssetMainModel> getConditionAndModel(@PathVariable String model , @PathVariable String condition){
         return service.getConditionAndModel(model,condition);
     }
 
     //get assets by condition and categories
     @GetMapping("/category={category}&condition={condition}")
+    @ApiOperation(value = "Filter by category and condition.")
     public List<AssetMainModel> getConditionAndCategory(@PathVariable String category , @PathVariable String condition){
         return service.getConditionByCategory(category,condition);
     }
 
     //Get assets by category and model
     @GetMapping("/category={category}&status={status}")
+    @ApiOperation(value = "Filter by category and status.")
     public List<AssetMainModel> getStatusByCategory(@PathVariable String category, @PathVariable String status){
         return service.getStatusByCategory(category,status);
     }
 
     //Get all assets by status and subcategories
+    @ApiOperation(value = "Get all assets by status and subcategories.")
     @GetMapping("/subcategory={subcategory}&status={status}")
     public List<AssetMainModel> getStatusBySubcategory(@PathVariable String subcategory , @PathVariable String status){
         return service.getStatusBySubCategory(subcategory,status);
     }
 
     //Get all assets by condition and category
+    @ApiOperation(value = "Get all assets by category and condition.")
     @GetMapping("/subcategory={subcategory}&condition={condition}")
     public List<AssetMainModel> getBysubCategoryAndCondition(@PathVariable String subcategory , @PathVariable String condition){
         return service.getByConditionAndBySubCategory(subcategory,condition);
@@ -205,6 +224,7 @@ public class AllDataController {
 
     //UPDATE STATUS BY ID
     @GetMapping("/updateStatus/{id}/status={status}")
+    @ApiOperation(value = "Update status by asset ID.")
     public Object updateStatus(@PathVariable String id, @PathVariable String status){
         Query updateStatusQuery = new Query(Criteria.where("_id").is(id));
         try {
@@ -219,6 +239,7 @@ public class AllDataController {
 
     //Method to update a field at a time
     @GetMapping("/id={id}/update={field}&value={value}")
+    @ApiOperation(value = "Update particular field by ID.")
     public void getByTags(@PathVariable String id, @PathVariable String field, @PathVariable String value) {
         //kjo eshte per te bere edit nje fushe te caktuar
 //        Map<String,String> values = new HashMap<>();
@@ -237,6 +258,7 @@ public class AllDataController {
 
     //To filter our data for a dynamic search we can add as many field as we want
     @PostMapping("/filterData")
+    @ApiOperation(value = "Dynamic search. Send request in a form of a object.")
     public List<AssetMainModel> getByTags(@RequestBody DynamicSearch object){
         //We make a POST requests in this form:
        //
@@ -282,6 +304,7 @@ public class AllDataController {
 
     //Easier way to add data to our database
     @PostMapping("/addData")
+    @ApiOperation(value = "Here we can add data to our database.")
     public String insertOne(@RequestBody Object readyObject){
         try {
             mongoTemplate.save(readyObject, "assetcollection");
